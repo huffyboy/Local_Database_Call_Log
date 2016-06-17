@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Local Database Call Log</string>
+    <string name="view">VIEW</string>
+    <string name="add">ADD</string>
+    <string name="sync">SYNC</string>
+    <string name="update">UPDATE</string>
+    <string name="garbage">garbage</string>
+</resources>
