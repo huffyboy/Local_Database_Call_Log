@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    //LocalSingleton localConnection;
     DatabaseHelper myDb;
     EditText textName, textPhone, textStartTime, textEndTime, textDuration, textNotes;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //localConnection = new LocalSingleton(this);
         myDb = new DatabaseHelper(this);
 
         textName      = (EditText) findViewById(R.id.editText_name);
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickAddData(View v) {
         //boolean isInserted = myDb.insertData("Dummy", "123");
+        //boolean isInserted = localConnection.insertRow(
         boolean isInserted = myDb.insertData(
                 textName.getText().toString(),
                 textPhone.getText().toString(),
@@ -37,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 textDuration.getText().toString(),
                 textNotes.getText().toString()
         );
-
 
         if (isInserted) {
             Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickViewData(View v) {
+        //Cursor resultCursor = localConnection.getAllRows();
         Cursor resultCursor = myDb.getAllData();
         System.out.println("Before get count");
         if (resultCursor.getCount() == 0) {
@@ -81,11 +84,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickSyncDatabase(View v) {
+        //localConnection.clearContents();
         myDb.deleteAllData();
     }
-
-
-
 
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
